@@ -38,8 +38,8 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
-    this.y = 350;
-    this.speed = 20; 
+    this.y = 400;
+    this.speed = 100; 
 };
 
 Player.prototype.update = function(dt) {
@@ -49,9 +49,14 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 400;
+    this.speed = 100; 
+}
+
 Player.prototype.handleInput = function(dt) {
-    // console.log(dt); 
-    // the player cannot move off screen
+    // console.log(dt);
 
     // move the Player
     switch(event.keyCode) {
@@ -69,12 +74,28 @@ Player.prototype.handleInput = function(dt) {
             break;
     }
 
-    // If the player reaches the water the game should be reset by 
-    // moving the player back to the initial location
-    if (this.y <= 10) {
-        this.y = 350; 
+    // the player cannot move off screen
+    if (this.x >= 400) {
+        this.x = 399; 
+        this.speed = 0; 
+    } 
+    else if (this.x <= 0) {
+        this.x = 1;
+        this.speed = 0; 
+    }
+    else if (this.y >= 400) {
+        this.y = 399;
+        this.speed = 0; 
+    }
+    else {
+        this.speed = 100; 
     }
 
+    // If the player reaches the water the game should be reset by 
+    // moving the player back to the initial location
+    if (this.y <= -10) {
+        this.reset();
+    }
     
 };
 
