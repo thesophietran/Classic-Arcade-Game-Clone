@@ -33,74 +33,72 @@ class Enemy {
 }
 
 
-
-
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function() {
-    this.sprite = 'images/char-boy.png';
-    this.x = 200;
-    this.y = 400;
-    this.speed = 100; 
-};
-
-Player.prototype.update = function(dt) {
-};
-
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-Player.prototype.reset = function() {
-    this.x = 200;
-    this.y = 400;
-    this.speed = 100; 
-}
-
-Player.prototype.handleInput = function(dt) {
-    // console.log(dt);
-
-    // move the Player
-    switch(event.keyCode) {
-        case 37:
-            this.x -= this.speed; 
-            break; 
-        case 38:
-            this.y -= this.speed;
-            break;
-        case 39:
-            this.x += this.speed;
-            break; 
-        case 40:
-            this.y += this.speed; 
-            break;
-    }
-
-    // the player cannot move off screen
-    if (this.x >= 400) {
-        this.speed = 0; 
-        this.x = 399; 
-    } 
-    else if (this.x <= 0) {
-        this.speed = 0; 
-        this.x = 1;
-    }
-    else if (this.y >= 400) {
-        this.speed = 0; 
-        this.y = 399;
-    }
-    else {
+class Player {
+    constructor() {
+        this.sprite = 'images/char-boy.png';
+        this.x = 200;
+        this.y = 400;
         this.speed = 100; 
     }
 
-    // If the player reaches the water the game should be reset by 
-    // moving the player back to the initial location
-    if (this.y <= -10) {
-        this.reset();
+    update(dt) {
+
     }
-    
-};
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    reset() {
+        this.x = 200;
+        this.y = 400;
+        this.speed = 100; 
+    }
+
+    handleInput() {
+        // move the Player
+        switch(event.keyCode) {
+            case 37:
+                this.x -= this.speed; 
+                break; 
+            case 38:
+                this.y -= this.speed;
+                break;
+            case 39:
+                this.x += this.speed;
+                break; 
+            case 40:
+                this.y += this.speed; 
+                break;
+        }
+
+        // the player cannot move off screen
+        if (this.x >= 400) {
+            this.speed = 0; 
+            this.x = 399; 
+        } 
+        else if (this.x <= 0) {
+            this.speed = 0; 
+            this.x = 1;
+        }
+        else if (this.y >= 400) {
+            this.speed = 0; 
+            this.y = 399;
+        }
+        else {
+            this.speed = 100; 
+        }
+
+        // If the player reaches the water the game should be reset by 
+        // moving the player back to the initial location
+        if (this.y <= -10) {
+            this.reset();
+        }
+    }
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
