@@ -1,36 +1,39 @@
 // Enemies our player must avoid
-var Enemy = function() {
-    // load an enemy image
-    this.sprite = 'images/enemy-bug.png';
+class Enemy {
+    constructor() {
+        // load an enemy image
+        this.sprite = 'images/enemy-bug.png';
 
-    // Setting the Enemy initial location
-    this.x = 0;
-    this.y = 60; 
+        // Setting the Enemy initial location
+        this.x = 0;
+        this.y = 60; 
 
-    // Setting the Enemy speed 
-    this.speed = 150;
-};
+        // Setting the Enemy speed 
+        this.speed = 150;
+    }
 
-// Update the enemy's position 
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+    update(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
 
     // Updates the Enemy location
-    this.x += (this.speed * dt); 
-    if (this.x > 500) {
-        this.x = 0; 
-    }
+        this.x += (this.speed * dt); 
+        if (this.x > 500) {
+            this.x = 0; 
+        }
 
     // Handles collision with the Player
-};
+    }
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    render() {
+    // Draw the enemy on the screen, required method for game
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
+
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -76,16 +79,16 @@ Player.prototype.handleInput = function(dt) {
 
     // the player cannot move off screen
     if (this.x >= 400) {
-        this.x = 399; 
         this.speed = 0; 
+        this.x = 399; 
     } 
     else if (this.x <= 0) {
-        this.x = 1;
         this.speed = 0; 
+        this.x = 1;
     }
     else if (this.y >= 400) {
-        this.y = 399;
         this.speed = 0; 
+        this.y = 399;
     }
     else {
         this.speed = 100; 
@@ -103,6 +106,7 @@ Player.prototype.handleInput = function(dt) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [new Enemy()]; 
+
 var player = new Player(); 
 
 // This listens for key presses and sends the keys to your
