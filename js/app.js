@@ -1,6 +1,7 @@
 // gameboard measurements: each column is 101px and each row is 83px 
 const oneCol = 101;
 const oneRow = 83; 
+const padding = 20; // use to center object 
 
 // Enemies the Player must avoid
 class Enemy {
@@ -9,7 +10,7 @@ class Enemy {
         this.sprite = sprite;
         // Setting the Enemy initial location
         this.x = x;
-        this.y = y - 20; // -30 is added to center the bug
+        this.y = y - padding; 
         // Setting the Enemy speed 
         this.speed = speed;
     }
@@ -39,7 +40,8 @@ class Player {
     constructor() {
         this.sprite = 'images/char-boy.png';
         this.x = oneCol * 2;
-        this.y = oneRow * 5 - 20; // -20 is added to center the Player
+        this.y = oneRow * 5 - padding; 
+        this.win = false; 
     }
 
     update() {
@@ -47,11 +49,17 @@ class Player {
         for (let enemy of allEnemies) {
             if (this.x >= enemy.x-oneCol/2 && this.x <= enemy.x+oneCol/2
                 && this.y === enemy.y) {
-                // console.log(this.x, this.y);
+                console.log(this.x, this.y);
                 // console.log(enemy.x, enemy.y); 
                 console.log("COLLIDED"); 
                 this.reset(); 
             }
+        }
+
+        // The Player wins the game if reaching the last tile 
+        if (this.y === oneRow - padding) {
+            console.log("WIN!"); 
+            this.win = true; 
         }
     }
 
@@ -100,10 +108,10 @@ class Player {
 
 // Collectibles the Player can collect for higher score 
 class Collectibles {
-    constructor({sprite = 'images/Gem Orange.png', x = 101, y = -20} = {}) {
+    constructor({sprite = 'images/Gem Orange.png', x = oneCol, y = oneRow} = {}) {
         this.sprite = sprite;
         this.x = x;
-        this.y = y;
+        this.y = y - padding;
     }
 
     update() {
@@ -125,12 +133,19 @@ class Collectibles {
     }
 }
 
-// function randomly selects a certain numbers of elements from an array source
+// function randomly selects a numbers of elements from an array source
 function generateElements(arrSource, neededElements) {
     var result = [];
-    for (var i = 0; i < neededElements; i++) {
-        result.push(arrSource[Math.floor(Math.random() * arrSource.length)]);
+    var count = 0; 
+    while (count < neededElements) {
+        var newElement = arrSource[Math.floor(Math.random() * arrSource.length)];
+        // only accept different elements
+        if (!result.includes(newElement)) {
+            result.push(newElement);
+            count++; 
+        }
     }
+    console.log(result); 
     return result;
 }
 
@@ -140,15 +155,16 @@ var enemySource = [new Enemy(), new Enemy({speed:220}), new Enemy({speed:250}),
                     new Enemy({y:oneRow*3}), new Enemy({y:oneRow*3, speed:40}), new Enemy({y:oneRow*3, speed:250})]; 
 
 // Place all enemy objects in an array called allEnemies
-var allEnemies = generateElements(enemySource, 2); 
+var allEnemies = generateElements(enemySource, 5); 
 
 // Place the player object in a variable called player
 var player = new Player(); 
 
 // Generate collectibles 
-var collectiblesSource = [new Collectibles(), new Collectibles({x:202}), new Collectibles({x:404}),  
-                            new Collectibles({y:140}), new Collectibles({y:140}), new Collectibles({y:140}),
-                            new Collectibles({y:220}), new Collectibles({y:220}), new Collectibles({y:220})]; 
+var collectiblesSource = [new Collectibles(), new Collectibles({x:oneCol*2}), new Collectibles({x:oneCol*3}),  
+                            new Collectibles({y:oneRow*2}), new Collectibles({x:oneCol*3, y:oneRow*2}), new Collectibles({x:oneCol*4, y:oneRow*2}),
+                            new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({x:oneCol*3, y:oneRow*2}), new Collectibles({x:oneCol*4,y:oneRow*2}),
+                            new Collectibles(), new Collectibles({x:oneCol*2}), new Collectibles({x:oneCol*3})]; 
 
 
 var allCollectibles = generateElements(collectiblesSource, 0); 
