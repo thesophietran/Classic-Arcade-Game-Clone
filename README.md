@@ -16,7 +16,7 @@ Starting game
 
 Winning the game
 <p align="center">
-  <img src='https://github.com/loanttran/UFEND-Project3-Classic-Arcade-Game-Clone/blob/master/images/3.png' width=50%>
+  <img src='https://github.com/loanttran/UFEND-Project3-Classic-Arcade-Game-Clone/blob/master/images/3.png' width=80%>
 </p>
 
 
