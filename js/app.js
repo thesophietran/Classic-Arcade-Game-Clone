@@ -1,6 +1,6 @@
 // Enemies Class
 class Enemy {
-    constructor({sprite = "images/enemy-bug.png", x = 0, y = 60, speed = 150} = {}) {
+    constructor({sprite = "images/enemy-bug.png", x = 0, y = 60, speed = 100} = {}) {
         // load an enemy image
         this.sprite = sprite;
 
@@ -18,15 +18,10 @@ class Enemy {
     // all computers.
 
     // Updates the Enemy location
-        this.x += (this.speed * dt); 
+        this.x += this.speed * dt; 
         if (this.x > 500) {
             this.x = 0; 
         }
-
-        // Handles collision with the Player
-        // if (this.x === Player.x) {
-        //     console.log("COLLIDED");
-        // }
     }
 
     render() {
@@ -38,15 +33,25 @@ class Enemy {
 
 // Player Class
 class Player {
-    constructor({sprite = 'images/char-boy.png', x = 200, y = 400, speed = 100} = {}) {
+    constructor({sprite = 'images/char-boy.png', x = 200, y = 400, speed = 80} = {}) {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
         this.speed = speed;  
     }
 
-    update(dt) {
-
+    update() {
+        // Handles collision 
+        for (let enemy of allEnemies) {
+            // console.log(enemy); 
+            if (this.x >= enemy.x-40 && this.x <= enemy.x+40
+                && this.y >= enemy.y-40 && this.y <= enemy.y+40) {
+                console.log(this.x, this.y);
+                console.log(enemy.x, enemy.y); 
+                console.log("COLLIDED"); 
+                this.reset(); 
+            }
+        }
     }
 
     render() {
@@ -56,7 +61,7 @@ class Player {
     reset() {
         this.x = 200;
         this.y = 400;
-        this.speed = 100; 
+        this.speed = 80; 
     }
 
     handleInput(dt) {
@@ -90,12 +95,12 @@ class Player {
             this.y = 400;
         }
         else {
-            this.speed = 100; 
+            this.speed = 80; 
         }
 
         // If the player reaches the water the game should be reset by 
         // moving the player back to the initial location
-        if (this.y <= -10) {
+        if (this.y <= -50) {
             this.reset();
         }
     }
@@ -105,9 +110,18 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 // const allEnemies = [new Enemy({y:150}), new Enemy({y:220, speed:70})]; 
-var allEnemies = [new Enemy(), new Enemy({y:150, speed:50}), new Enemy({y:240, speed:20})]; 
+var allEnemies = [new Enemy(), new Enemy({y:140, speed:60}), new Enemy({y:220, speed:40})]; 
 
 var player = new Player(); 
+
+// for (let enemy of allEnemies) {
+//     if (player.x >= enemy.x-40 && player.x <= enemy.x+40
+//         && player.y >= enemy.y+40 && player.y <= enemy.y+40) {
+//         console.log(player.x, player.y);
+//         console.log(enemy.x, enemy.y); 
+//         console.log("COLLIDED"); 
+//     }
+// }
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
