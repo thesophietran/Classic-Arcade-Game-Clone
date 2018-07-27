@@ -34,11 +34,10 @@ class Enemy {
     }
 }
 
-
 // The Player
 class Player {
     constructor() {
-        this.sprite = 'images/char-boy.png';
+        this.sprite = 'images/char-horn-girl.png';
         this.x = oneCol * 2;
         this.y = oneRow * 5 - padding; 
         this.win = false; 
@@ -49,9 +48,6 @@ class Player {
         for (let enemy of allEnemies) {
             if (this.x >= enemy.x-oneCol/2 && this.x <= enemy.x+oneCol/2
                 && this.y === enemy.y) {
-                // console.log(this.x, this.y);
-                // console.log(enemy.x, enemy.y); 
-                // console.log("COLLIDED"); 
                 this.reset(); 
             }
         }
@@ -60,14 +56,14 @@ class Player {
         for (let collectibles of allCollectibles) {
             if (this.x >= collectibles.x-oneCol/2 && this.x <= collectibles.x+oneCol/2
                 && this.y === collectibles.y) {
-                console.log("GOT A DIAMOND"); 
+                // console.log("GOT A DIAMOND"); 
                 allCollectibles.splice(allCollectibles.indexOf(collectibles), 1); 
             }
         }
 
         // The Player wins the game if reaching the last tile and acquiring all the diamonds
         if (this.y === oneRow - padding && allCollectibles.length === 0) {
-            console.log("WIN!"); 
+            // console.log("WIN!"); 
             this.win = true; 
         }
     }
@@ -138,7 +134,6 @@ function generateElements(arrSource, neededElements) {
             count++; 
         }
     }
-    console.log(result); 
     return result;
 }
 
@@ -159,7 +154,6 @@ var collectiblesSource = [new Collectibles(), new Collectibles({sprite:'images/G
                             new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*3, y:oneRow*3}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*4,y:oneRow*3}),
                             new Collectibles({sprite:'images/Gem Blue.png', y:oneRow*4}), new Collectibles({x:oneCol*4,y:oneRow*4})]; 
 
-
 var allCollectibles = generateElements(collectiblesSource, 4); 
 
 // This listens for key presses and sends the keys to your Player.handleInput() method 
@@ -170,6 +164,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
