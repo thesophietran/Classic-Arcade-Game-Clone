@@ -110,18 +110,22 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 // const allEnemies = [new Enemy({y:150}), new Enemy({y:220, speed:70})]; 
-var allEnemies = [new Enemy(), new Enemy({y:140, speed:60}), new Enemy({y:220, speed:40})]; 
+var enemySource = [new Enemy(), new Enemy({speed:220}), new Enemy({speed: 450}),  
+                    new Enemy({y:140}), new Enemy({y:140, speed:60}), new Enemy({y:140, speed:160}),
+                    new Enemy({y:220}), new Enemy({y:220, speed:40}), new Enemy({y:220, speed:400})]; 
+
+function generateEnemies(arrSource, neededElements) {
+    // select a certain number of enemies, randomely selected from the source
+    var result = [];
+    for (var i = 0; i < neededElements; i++) {
+        result.push(arrSource[Math.floor(Math.random() * arrSource.length)]);
+    }
+    return result;
+}
+
+var allEnemies = generateEnemies(enemySource, 4); 
 
 var player = new Player(); 
-
-// for (let enemy of allEnemies) {
-//     if (player.x >= enemy.x-40 && player.x <= enemy.x+40
-//         && player.y >= enemy.y+40 && player.y <= enemy.y+40) {
-//         console.log(player.x, player.y);
-//         console.log(enemy.x, enemy.y); 
-//         console.log("COLLIDED"); 
-//     }
-// }
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
