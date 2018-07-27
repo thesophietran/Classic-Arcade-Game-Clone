@@ -31,7 +31,8 @@ var Engine = (function(global) {
     replay.addEventListener('click', function() {
         modal.classList.toggle('hide');
         player.reset(); 
-        player.win = false; 
+        player.win = false;
+        allCollectibles = generateElements(collectiblesSource, 4);  
         win.requestAnimationFrame(main); 
     }); 
 

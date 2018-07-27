@@ -45,19 +45,28 @@ class Player {
     }
 
     update() {
-        // Handles collision 
+        // Handles collision with the enemies 
         for (let enemy of allEnemies) {
             if (this.x >= enemy.x-oneCol/2 && this.x <= enemy.x+oneCol/2
                 && this.y === enemy.y) {
-                console.log(this.x, this.y);
+                // console.log(this.x, this.y);
                 // console.log(enemy.x, enemy.y); 
-                console.log("COLLIDED"); 
+                // console.log("COLLIDED"); 
                 this.reset(); 
             }
         }
 
-        // The Player wins the game if reaching the last tile 
-        if (this.y === oneRow - padding) {
+        // Handles diamond acquisiton 
+        for (let collectibles of allCollectibles) {
+            if (this.x >= collectibles.x-oneCol/2 && this.x <= collectibles.x+oneCol/2
+                && this.y === collectibles.y) {
+                console.log("GOT A DIAMOND"); 
+                allCollectibles.splice(allCollectibles.indexOf(collectibles), 1); 
+            }
+        }
+
+        // The Player wins the game if reaching the last tile and acquiring all the diamonds
+        if (this.y === oneRow - padding && allCollectibles.length === 0) {
             console.log("WIN!"); 
             this.win = true; 
         }
@@ -70,7 +79,7 @@ class Player {
     reset() {
         // Return the Player to the starting position 
         this.x = oneCol * 2;
-        this.y = oneRow * 5 - 20;
+        this.y = oneRow * 5 - padding;
     }
 
     handleInput(input) {
@@ -86,11 +95,6 @@ class Player {
                 if (this.y > oneRow) {
                     this.y -= oneRow;
                 } 
-                else {
-                // If the player reaches the water the game should be reset by 
-                // moving the player back to the initial location
-                    this.reset();
-                }
                 break;
             case 'right':
                 if (this.x < oneCol * 4) {
@@ -115,17 +119,6 @@ class Collectibles {
     }
 
     update() {
-    //     // Handles collision 
-    //     for (let enemy of allEnemies) {
-    //         // console.log(enemy); 
-    //         if (this.x >= enemy.x-40 && this.x <= enemy.x+40
-    //             && this.y >= enemy.y-40 && this.y <= enemy.y+40) {
-    //             console.log(this.x, this.y);
-    //             console.log(enemy.x, enemy.y); 
-    //             console.log("COLLIDED"); 
-    //             this.reset(); 
-    //         }
-    //     }
     }
 
     render() {
@@ -163,11 +156,11 @@ var player = new Player();
 // Generate collectibles 
 var collectiblesSource = [new Collectibles(), new Collectibles({x:oneCol*2}), new Collectibles({x:oneCol*3}),  
                             new Collectibles({y:oneRow*2}), new Collectibles({x:oneCol*3, y:oneRow*2}), new Collectibles({x:oneCol*4, y:oneRow*2}),
-                            new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({x:oneCol*3, y:oneRow*2}), new Collectibles({x:oneCol*4,y:oneRow*2}),
-                            new Collectibles(), new Collectibles({x:oneCol*2}), new Collectibles({x:oneCol*3})]; 
+                            new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({x:oneCol*3, y:oneRow*3}), new Collectibles({x:oneCol*4,y:oneRow*3}),
+                            new Collectibles({y:oneRow*4}), new Collectibles({x:oneCol*4,y:oneRow*4})]; 
 
 
-var allCollectibles = generateElements(collectiblesSource, 0); 
+var allCollectibles = generateElements(collectiblesSource, 4); 
 
 // This listens for key presses and sends the keys to your Player.handleInput() method 
 document.addEventListener('keyup', function(e) {
