@@ -154,10 +154,10 @@ var allEnemies = generateElements(enemySource, 5);
 var player = new Player(); 
 
 // Generate collectibles 
-var collectiblesSource = [new Collectibles(), new Collectibles({x:oneCol*2}), new Collectibles({x:oneCol*3}),  
-                            new Collectibles({y:oneRow*2}), new Collectibles({x:oneCol*3, y:oneRow*2}), new Collectibles({x:oneCol*4, y:oneRow*2}),
-                            new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({x:oneCol*3, y:oneRow*3}), new Collectibles({x:oneCol*4,y:oneRow*3}),
-                            new Collectibles({y:oneRow*4}), new Collectibles({x:oneCol*4,y:oneRow*4})]; 
+var collectiblesSource = [new Collectibles(), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*2}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*3}),  
+                            new Collectibles({y:oneRow*2}), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*3, y:oneRow*2}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*4, y:oneRow*2}),
+                            new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*3, y:oneRow*3}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*4,y:oneRow*3}),
+                            new Collectibles({sprite:'images/Gem Blue.png', y:oneRow*4}), new Collectibles({x:oneCol*4,y:oneRow*4})]; 
 
 
 var allCollectibles = generateElements(collectiblesSource, 4); 
