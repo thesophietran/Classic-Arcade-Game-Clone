@@ -1,3 +1,5 @@
+"use strict"; 
+
 // gameboard measurements: each column is 101px and each row is 83px 
 const oneCol = 101;
 const oneRow = 83; 
@@ -129,10 +131,10 @@ class Collectibles {
 
 // function randomly selects a numbers of elements from an array source
 function generateElements(arrSource, neededElements) {
-    var result = [];
-    var count = 0; 
+    let result = [];
+    let count = 0; 
     while (count < neededElements) {
-        var newElement = arrSource[Math.floor(Math.random() * arrSource.length)];
+        let newElement = arrSource[Math.floor(Math.random() * arrSource.length)];
         // only accept different elements
         if (!result.includes(newElement)) {
             result.push(newElement);
@@ -143,27 +145,27 @@ function generateElements(arrSource, neededElements) {
 }
 
 // Now instantiate objects
-var enemySource = [new Enemy(), new Enemy({speed:220}), new Enemy({speed:250}),  
+let enemySource = [new Enemy(), new Enemy({speed:220}), new Enemy({speed:250}),  
                     new Enemy({y:oneRow*2}), new Enemy({y:oneRow*2, speed:60}), new Enemy({y:oneRow*2, speed:160}),
                     new Enemy({y:oneRow*3}), new Enemy({y:oneRow*3, speed:40}), new Enemy({y:oneRow*3, speed:250})]; 
 
 // Place all enemy objects in an array called allEnemies
-var allEnemies = generateElements(enemySource, 5); 
+let allEnemies = generateElements(enemySource, 5); 
 
 // Place the player object in a variable called player
-var player = new Player(); 
+let player = new Player(); 
 
 // Generate collectibles 
-var collectiblesSource = [new Collectibles(), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*2}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*3}),  
+let collectiblesSource = [new Collectibles(), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*2}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*3}),  
                             new Collectibles({y:oneRow*2}), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*3, y:oneRow*2}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*4, y:oneRow*2}),
                             new Collectibles({x:oneCol*2,y:oneRow*3}), new Collectibles({sprite:'images/Gem Blue.png', x:oneCol*3, y:oneRow*3}), new Collectibles({sprite:'images/Gem Green.png', x:oneCol*4,y:oneRow*3}),
                             new Collectibles({sprite:'images/Gem Blue.png', y:oneRow*4}), new Collectibles({x:oneCol*4,y:oneRow*4})]; 
 
-var allCollectibles = generateElements(collectiblesSource, 4); 
+let allCollectibles = generateElements(collectiblesSource, 4); 
 
 // This listens for key presses and sends the keys to your Player.handleInput() method 
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    let allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
