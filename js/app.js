@@ -76,6 +76,8 @@ class Player {
         // Return the Player to the starting position 
         this.x = oneCol * 2;
         this.y = oneRow * 5 - padding;
+        allCollectibles = []; 
+        allCollectibles = generateElements(collectiblesSource, 4);  
     }
 
     handleInput(input) {
