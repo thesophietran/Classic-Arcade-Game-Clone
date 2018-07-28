@@ -78,6 +78,9 @@ class Player {
         this.y = oneRow * 5 - padding;
         allCollectibles = []; 
         allCollectibles = generateElements(collectiblesSource, 4);  
+        allEnemies = [];
+        allEnemies = generateElements(enemySource, 5);
+        // console.log(allEnemies); 
     }
 
     handleInput(input) {
