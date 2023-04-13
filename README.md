@@ -18,4 +18,4 @@ Winning the game
   <img src='https://github.com/loanttran/UFEND-Project3-Classic-Arcade-Game-Clone/blob/master/images/3.png' width=80%>
 </p>
 
-Have fun 😀!
+Have fun! 😀
