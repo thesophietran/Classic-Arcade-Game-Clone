@@ -10,12 +10,12 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 ## Game Interface 
 Starting game 
 <p align="center">
-  <img src='https://github.com/loanttran/UFEND-Project3-Classic-Arcade-Game-Clone/blob/master/images/2.png' width=80%>
+  <img src='./images/2.png' width=80%>
 </p>
 
 Winning the game
 <p align="center">
-  <img src='https://github.com/loanttran/UFEND-Project3-Classic-Arcade-Game-Clone/blob/master/images/3.png' width=80%>
+  <img src='./images/3.png' width=80%>
 </p>
 
 Have fun! 😀
